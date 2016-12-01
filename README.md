@@ -50,18 +50,11 @@ lot less than you'll learn by working on the tests, even if you occasionally get
 stuck. I'd recommend only looking at the answers once you have the tests
 passing, to see if there's another way you could have approached the
 problem. When you're ready to look at the answers, you can find them
-[here](https://github.com/rmurphey/js-assessment-answers); I'll do my best to
-keep them up to date.
-
-# Todos
-
-There are a number of things that would make this project better; check out the
-[issues](https://github.com/rmurphey/js-assessment/issues) for details, pull
-requests welcome!
+[here](https://github.com/rmurphey/js-assessment-answers).
 
 # License
 
-Copyright &copy; 2016 with thanks to Rebecca Murphey for the original [js-assessment](https://github.com/rmurphey/js-assessment).
+Copyright &copy; 2016 [Andy Weir](https://github.com/OceanInternet) with thanks to [Rebecca Murphey](https://github.com/rmurphey) for the original [js-assessment](https://github.com/rmurphey/js-assessment).
 
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
 
