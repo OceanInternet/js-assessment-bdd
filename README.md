@@ -7,12 +7,7 @@ a candidate for a JavaScript position, or to evaluate and improve one's own
 skills.
 
 ## I want to work on the tests; what do I do?
-To use the tests, you will need to install [Node](https://nodejs.org/). Note
-that on Windows, there are some reports that you will need to restart
-after installing Node.
-
-You can clone or download this repo. Once you have done so, from the root
-directory of the repo, run:
+To use the tests, you will need to install [Node](https://nodejs.org/). You can clone or download this repo. Once you have done so, from the root directory of the repo, run:
 
     npm install
     npm start
