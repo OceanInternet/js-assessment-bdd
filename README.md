@@ -1,4 +1,4 @@
-This is a re-write of [js-assessment](https://github.com/rmurphey/js-assessment) using cucumber-js.
+This is a re-write of [js-assessment](https://github.com/rmurphey/js-assessment) using [cucumber-js](https://github.com/cucumber/cucumber-js).
 
 # A BDD test-driven JS assessment
 
