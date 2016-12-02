@@ -1,4 +1,4 @@
-Feature: Test Feature
+Feature: Modules
   In order to test cucmber-html-report
   As a developer
   I am writing this feature
