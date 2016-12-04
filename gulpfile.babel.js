@@ -2,15 +2,34 @@
 import gulp from 'gulp';
 import browser from 'browser-sync';
 import cucumber from 'gulp-cucumber';
+import Report from 'cucumber-html-report';
+import del from 'del';
 
-function runCucumber() {
+const reportOptions = {
+    source: 'results/app.json',   // source json
+    dest: 'results',              // target directory (will create if not exists)
+    name: 'index.html',           // report file name (will be index.html if not exists)
+    title: 'js-assessment-bdd'//, // Title for default template. (default is Cucumber Report
+//  component: 'My Component',    // Subtitle for default template. (default is empty)
+};
 
-    return gulp
+let testReport = new Report(reportOptions);
+
+function clean() {
+
+    return del('results/**/*');
+}
+
+function runCucumber(done) {
+
+    gulp
         .src('features/*')
         .pipe(cucumber({
-            'steps': 'features/steps/steps.js',
-            'format': 'json:results/app.json'
+            'format': 'json:results/app.json',
+            'emitErrors': false
         }));
+
+    done();
 }
 
 function reload(done) {
@@ -18,20 +37,34 @@ function reload(done) {
     done()
 }
 
-function sync () {
+function sync(done) {
 
-    // Serve files from the root of this project
+    let originalKeys = Object.keys(require.cache);
+
     browser.init({
         server: {
-            baseDir: "./"
+            baseDir: "results/"
         }
     });
 
-    // add browser.reload to the tasks array to make
-    // all browsers reload after tasks are complete.
-    gulp.watch('app/**/*.js', gulp.series('js-watch'));
+    gulp.watch(['app/**/*.js', 'features/**/*'], function (done) {
+
+        let newKeys = Object.keys(require.cache);
+        while (newKeys.length > originalKeys.length) {
+            delete require.cache[newKeys.pop()];
+        }
+
+        runCucumber(done);
+    });
+    gulp.watch(['results/**/*.json'], gulp.series(createReport, reload));
+
+    runCucumber(done);
 }
 
-gulp.task('js-watch', gulp.series(runCucumber, reload));
-gulp.task('serve', gulp.series(runCucumber, sync));
+function createReport(done) {
+
+    testReport.createReport() && done();
+}
+
+gulp.task('serve', gulp.series(clean, sync));
 gulp.task('default', gulp.series('serve'));

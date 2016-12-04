@@ -1,59 +1,235 @@
 [
   {
-    "description": "  In order to test cucmber-html-report\n  As a developer\n  I am writing this feature",
+    "description": "  As a [role]\n  I want [feature]\n  So that [benefit]",
     "elements": [
       {
-        "id": "test-feature;",
+        "id": "arrays;determine-the-location-of-an-item-in-an-array",
         "keyword": "Scenario",
-        "line": 6,
-        "name": "",
+        "line": 15,
+        "name": "determine the location of an item in an array",
         "steps": [
           {
             "arguments": [],
-            "keyword": "Given ",
-            "name": "a value",
+            "keyword": "Before ",
             "result": {
-              "status": "undefined"
+              "status": "passed",
+              "duration": 255624
             },
-            "line": 7
+            "hidden": true,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:13"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "inputArray = [ 1, 2, 3, 4 ]",
+            "result": {
+              "status": "passed",
+              "duration": 296936
+            },
+            "line": 7,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:15"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "a function: getArrayIndex",
+            "result": {
+              "status": "passed",
+              "duration": 132932
+            },
+            "line": 10,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:23"
+            }
           },
           {
             "arguments": [],
             "keyword": "When ",
-            "name": "something happens",
+            "name": "the function is called with (inputArray, 2)",
             "result": {
-              "status": "undefined"
+              "status": "passed",
+              "duration": 174048
             },
-            "line": 8
+            "line": 11,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:29"
+            }
           },
           {
             "arguments": [],
             "keyword": "Then ",
-            "name": "the value will change",
+            "name": "the function will return 1",
             "result": {
-              "status": "undefined"
+              "status": "passed",
+              "duration": 236777
             },
-            "line": 9
+            "line": 12,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:41"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "id": "arrays;determine-the-location-of-an-item-in-an-array",
+        "keyword": "Scenario",
+        "line": 16,
+        "name": "determine the location of an item in an array",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Before ",
+            "result": {
+              "status": "passed",
+              "duration": 46825
+            },
+            "hidden": true,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:13"
+            }
           },
           {
             "arguments": [],
-            "keyword": "And ",
-            "name": "something will happen",
+            "keyword": "Given ",
+            "name": "inputArray = [ 1, 2, 3, 4 ]",
             "result": {
-              "status": "undefined"
+              "status": "passed",
+              "duration": 89314
             },
-            "line": 10
+            "line": 7,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:15"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "a function: getArrayIndex",
+            "result": {
+              "status": "passed",
+              "duration": 75283
+            },
+            "line": 10,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:23"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "the function is called with (inputArray, 5)",
+            "result": {
+              "status": "passed",
+              "duration": 74503
+            },
+            "line": 11,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:29"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "the function will return -1",
+            "result": {
+              "status": "passed",
+              "duration": 128709
+            },
+            "line": 12,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:41"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "id": "arrays;sum-the-items-of-an-array",
+        "keyword": "Scenario",
+        "line": 18,
+        "name": "sum the items of an array",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Before ",
+            "result": {
+              "status": "passed",
+              "duration": 48155
+            },
+            "hidden": true,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:13"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "inputArray = [ 1, 2, 3, 4 ]",
+            "result": {
+              "status": "passed",
+              "duration": 63916
+            },
+            "line": 7,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:15"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "a function: sumArrayItems",
+            "result": {
+              "status": "passed",
+              "duration": 52930
+            },
+            "line": 19,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:23"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "the function is called with (inputArray)",
+            "result": {
+              "status": "passed",
+              "duration": 215592
+            },
+            "line": 20,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:35"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "the function will return the sum of inputArray values",
+            "result": {
+              "status": "passed",
+              "duration": 757716
+            },
+            "line": 21,
+            "match": {
+              "location": "/home/andy/Headforwards/js-assessment-bdd/features/step_definitions/arrays.js:46"
+            }
           }
         ],
         "tags": [],
         "type": "scenario"
       }
     ],
-    "id": "test-feature",
+    "id": "arrays",
     "keyword": "Feature",
     "line": 1,
-    "name": "Test Feature",
+    "name": "Arrays",
     "tags": [],
-    "uri": "/home/andy/Headforwards/js-assessment-bdd/features/test.feature"
+    "uri": "/home/andy/Headforwards/js-assessment-bdd/features/arrays.feature"
   }
 ]
