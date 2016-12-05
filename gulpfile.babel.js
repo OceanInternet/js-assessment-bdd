@@ -6,11 +6,11 @@ import Report from 'cucumber-html-report';
 import del from 'del';
 
 const reportOptions = {
-    source: 'results/app.json',   // source json
-    dest: 'results',              // target directory (will create if not exists)
-    name: 'index.html',           // report file name (will be index.html if not exists)
-    title: 'js-assessment-bdd'//, // Title for default template. (default is Cucumber Report
-//  component: 'My Component',    // Subtitle for default template. (default is empty)
+    source:    'results/app.json',         // source json
+    dest:      'results',                  // target directory (will create if not exists)
+    name:      'index.html',               // report file name (will be index.html if not exists)
+    title:     'js-assessment-bdd'//,      // Title for default template. (default is Cucumber Report
+//  component: 'My Component',             // Subtitle for default template. (default is empty)
 };
 
 let testReport = new Report(reportOptions);
@@ -33,32 +33,38 @@ function runCucumber(done) {
 }
 
 function reload(done) {
-	browser.reload();
-	done()
+    browser.reload();
+    done()
 }
 
 function sync(done) {
 
     let originalKeys = Object.keys(require.cache);
 
+    gulp.watch(['app/**/*.js', 'features/**/*'], function (done) {
+
+        clearCache(originalKeys);
+        runCucumber(done);
+    });
+
+    gulp.watch(['results/**/*.json'], gulp.series(createReport, reload));
+
+    runCucumber(done);
+
     browser.init({
         server: {
             baseDir: "results/"
         }
     });
+}
 
-    gulp.watch(['app/**/*.js', 'features/**/*'], function (done) {
+function clearCache(originalKeys) {
 
-        let newKeys = Object.keys(require.cache);
-        while (newKeys.length > originalKeys.length) {
-            delete require.cache[newKeys.pop()];
-        }
+    let newKeys = Object.keys(require.cache);
 
-        runCucumber(done);
-    });
-    gulp.watch(['results/**/*.json'], gulp.series(createReport, reload));
-
-    runCucumber(done);
+    while (newKeys.length > originalKeys.length) {
+        delete require.cache[newKeys.pop()];
+    }
 }
 
 function createReport(done) {

@@ -40,13 +40,39 @@ module.exports = function () {
 
     this.Then(/^the function will return (-?\d+)$/, function (value) {
 
-        assert.equal(value, scenario.result);
+        assert.equal(
+            value,
+            scenario.result,
+            'function did not return ' + value
+        )
+        ;
     });
 
     this.Then(/^the function will return the sum of (\w+) values$/, function (one) {
 
-        assert.equal(getSumOfArrayIntegers(scenario[one]), scenario.result);
+        assert.equal(
+            getSumOfArrayIntegers(scenario[one]),
+            scenario.result,
+            'function did not return sum of ' + one + ' values'
+        );
     });
+
+    this.Then(/^the function will return (\w+) with instances of (\d+) removed$/, function (one, two) {
+
+        assert.deepEqual(
+            removeInstances(scenario[one], two),
+            scenario.result
+        );
+    });
+
+    this.Then(/^the function will return (\w+)$/, function (one) {
+
+        assert.equal(
+            scenario[one],
+            scenario.result
+        );
+    });
+
 
     function setup() {
         setInputArray();
@@ -82,11 +108,23 @@ module.exports = function () {
 
         let sum = 0;
 
-        for(let i=0; i<inputArray.length; i++) {
+        for (let i = 0; i < inputArray.length; i++) {
 
-            sum +=inputArray[i];
+            sum += inputArray[i];
         }
 
         return sum;
+    }
+
+    function removeInstances(inputArray, value) {
+
+        let result = [];
+
+        for (let i = 0; i < inputArray.length; i++) {
+
+            (inputArray[i] != value) && result.push(inputArray[i]);
+        }
+
+        return result;
     }
 };
