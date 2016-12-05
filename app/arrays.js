@@ -1,12 +1,13 @@
-(function () {
+'use strict'
 
-    'use strict';
+let answers = {};
 
-    function test() {
+answers.getArrayIndex = function (inputArray, value) {
 
-        console.log('testingtttt');
+};
 
+answers.sumArrayItems = function (inputArray) {
 
+};
 
-    }
-})();
+module.exports = answers;

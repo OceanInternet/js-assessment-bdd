@@ -2,29 +2,34 @@
 import gulp from 'gulp';
 import browser from 'browser-sync';
 import cucumber from 'gulp-cucumber';
-import report from 'cucumber-html-report';
+import Report from 'cucumber-html-report';
+import del from 'del';
 
-var reportOptions = {
-	source: 'results/app.json',  // source json
-	dest:   'results',           // target directory (will create if not exists)
-	name:   'index.html',        // report file name (will be index.html if not exists)
-	title:  'js-assessment-bdd'//, // Title for default template. (default is Cucumber Report)
-	// component: 'My Componen',       // Subtitle for default template. (default is empty)
+const reportOptions = {
+    source: 'results/app.json',   // source json
+    dest: 'results',              // target directory (will create if not exists)
+    name: 'index.html',           // report file name (will be index.html if not exists)
+    title: 'js-assessment-bdd'//, // Title for default template. (default is Cucumber Report
+//  component: 'My Component',    // Subtitle for default template. (default is empty)
 };
-var testReport    = new report(reportOptions);
 
-function runCucumber() {
+let testReport = new Report(reportOptions);
 
-	return gulp
-		.src('features/*')
-		.pipe(
-			cucumber(
-				{
-					'steps':  'features/steps/steps.js',
-					'format': 'json:results/app.json'
-				}
-			)
-		);
+function clean() {
+
+    return del('results/**/*');
+}
+
+function runCucumber(done) {
+
+    gulp
+        .src('features/*')
+        .pipe(cucumber({
+            'format': 'json:results/app.json',
+            'emitErrors': false
+        }));
+
+    done();
 }
 
 function reload(done) {
@@ -32,24 +37,34 @@ function reload(done) {
 	done()
 }
 
-function sync() {
+function sync(done) {
 
-	// Serve files from the root of this project
-	browser.init(
-		{
-			server: {
-				baseDir: "results/"
-			}
-		}
-	);
+    let originalKeys = Object.keys(require.cache);
 
-	gulp.watch('app/**/*.js', gulp.series(runCucumber, createReport, reload));
+    browser.init({
+        server: {
+            baseDir: "results/"
+        }
+    });
+
+    gulp.watch(['app/**/*.js', 'features/**/*'], function (done) {
+
+        let newKeys = Object.keys(require.cache);
+        while (newKeys.length > originalKeys.length) {
+            delete require.cache[newKeys.pop()];
+        }
+
+        runCucumber(done);
+    });
+    gulp.watch(['results/**/*.json'], gulp.series(createReport, reload));
+
+    runCucumber(done);
 }
 
 function createReport(done) {
 
-	testReport.createReport() && done();
+    testReport.createReport() && done();
 }
 
-gulp.task('serve', gulp.series(runCucumber, createReport, sync));
+gulp.task('serve', gulp.series(clean, sync));
 gulp.task('default', gulp.series('serve'));
