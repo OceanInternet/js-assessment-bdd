@@ -14,9 +14,7 @@ module.exports = function () {
 
     this.Given(/^(\w+) = \[(.*)\]$/, function (arrayName, arrayString, done) {
 
-        let inputArray = stringToArray(arrayString);
-
-        setArray(arrayName, inputArray);
+        setArray(arrayName, stringToArray(arrayString));
         done();
     });
 
@@ -28,19 +26,25 @@ module.exports = function () {
 
     this.When(/^the function is called with \((\w+), (\d+)\)$/, function (arrayName, value, done) {
 
-        setResult(scenario.answerFunction(scenario.arrays[arrayName], value));
+        setResult(scenario.answerFunction(getArray(arrayName), value));
         done();
     });
 
-    this.When(/^the function is called with \((\w+)\)$/, function (one, done) {
+    this.When(/^the function is called with \((\w+)\)$/, function (arrayName, done) {
 
-        setResult(scenario.answerFunction(scenario[one]));
+        setResult(scenario.answerFunction(getArray(arrayName)));
         done();
     });
 
-    this.When(/^the function is called with \((\w+), (\w+)\)$/, function (arrayA, arrayB, done) {
+    this.When(/^the function is called with arrays \((\w+), (\w+)\)$/, function (arrayA, arrayB, done) {
 
-        setResult(scenario.answerFunction(scenario.arrays[arrayA], scenario.arrays[arrayB]));
+        setResult(scenario.answerFunction(getArray(arrayA), getArray(arrayB)));
+        done();
+    });
+
+    this.When(/^the function is called with \((\w+), (\w+), (\d+)\)$/, function (arrayName, value, index, done) {
+
+        setResult(scenario.answerFunction(getArray(arrayName), value, index));
         done();
     });
 
@@ -69,20 +73,31 @@ module.exports = function () {
         );
     });
 
-    this.Then(/^the function will return array with length (\d+) and last value (\d+)$/, function (length, lastValue) {
+    this.Then(/^the function will return array with length (\d+), and (\w+) value (\d+|\w+)$/, function (length, nth, value) {
 
         let resultLength = scenario.result.length;
 
         assert.equal(resultLength, length);
-        assert.equal(scenario.result[resultLength-1], lastValue);
-    });
 
-    this.Then(/^the function will return array with length (\d+) and first value (\d+)$/, function (length, firstValue) {
-
-        let resultLength = scenario.result.length;
-
-        assert.equal(resultLength, length);
-        assert.equal(scenario.result[0], firstValue);
+        switch (nth) {
+            case 'first':
+                assert.equal(scenario.result[0], value);
+                break;
+            case 'second':
+                assert.equal(scenario.result[2], value);
+                break;
+            case 'third':
+                assert.equal(scenario.result[2], value);
+                break;
+            case 'fourth':
+                assert.equal(scenario.result[2], value);
+                break;
+            case 'last':
+                assert.equal(scenario.result[resultLength-1], value);
+                break;
+            default:
+                assert(false, 'could not match nth: ' + nth);
+        }
     });
 
     this.Then(/^the function will return array with length (\d+), first value (\d+) and last value (\w+)$/, function (length, firstValue, lastValue) {
@@ -94,7 +109,6 @@ module.exports = function () {
         assert.equal(scenario.result[resultLength-1], lastValue);
     });
 
-
     function setup() {
 
         scenario.arrays = [];
@@ -105,6 +119,11 @@ module.exports = function () {
     function setArray(arrayName, inputArray) {
 
         scenario.arrays[arrayName] = inputArray;
+    }
+
+    function getArray(arrayName) {
+
+        return scenario.arrays[arrayName];
     }
 
     function setAnswerFunction(answerFunction) {

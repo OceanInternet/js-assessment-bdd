@@ -38,4 +38,8 @@ answers.joinArrays = function (arrayA, arrayB) {
 
 };
 
+answers.addItemAtIndex = function (inputArray, value, index) {
+
+};
+
 module.exports = answers;

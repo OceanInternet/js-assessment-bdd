@@ -35,34 +35,38 @@ Feature: Arrays
     Given inputArray = [ 1, 2, 3, 4 ]
     And a function: addItemToEndOfArray
     When the function is called with (inputArray, 10)
-    Then the function will return array with length 5 and last value 10
+    Then the function will return array with length 5, and last value 10
 
   Scenario: remove the last item of an array
     Given inputArray = [ 1, 2, 3, 4 ]
     And a function: removeLastItem
     When the function is called with (inputArray)
-    Then the function will return array with length 3 and last value 3
+    Then the function will return array with length 3, and last value 3
 
   Scenario: add an item to the beginning of an array
     Given inputArray = [ 1, 2, 3, 4 ]
     And a function: addItemToBeginning
     When the function is called with (inputArray, 10)
-    Then the function will return array with length 5 and first value 10
+    Then the function will return array with length 5, and first value 10
 
   Scenario: remove the first item of an array
     Given inputArray = [ 1, 2, 3, 4 ]
     And a function: removeItemFromBeginning
     When the function is called with (inputArray)
-    Then the function will return array with length 3 and first value 2
+    Then the function will return array with length 3, and first value 2
 
   Scenario: join together two arrays
     Given arrayA = [ 1, 2, 3 ]
     And   arrayB = [ a, b, c ]
     And a function: joinArrays
-    When the function is called with (arrayA, arrayB)
+    When the function is called with arrays (arrayA, arrayB)
     Then the function will return array with length 6, first value 1 and last value c
 
   Scenario: add an item anywhere in an array
+    Given inputArray = [ 1, 2, 3, 4 ]
+    And a function: addItemAtIndex
+    When the function is called with (inputArray, z, 3)
+    Then the function will return array with length 5, and third value z
 
   Scenario: count the occurences of an item in an array
 
