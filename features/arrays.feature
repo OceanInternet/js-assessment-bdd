@@ -69,6 +69,10 @@ Feature: Arrays
     Then the function will return array with length 5, and third value z
 
   Scenario: count the occurences of an item in an array
+    Given inputArray = [ 1, 2, 4, 4, 3, 4, 3 ]
+    And a function: countOccurences
+    When the function is called with (inputArray, 4)
+    Then the function will return 3
 
   Scenario: find duplicates in an array
 

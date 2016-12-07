@@ -42,4 +42,8 @@ answers.addItemAtIndex = function (inputArray, value, index) {
 
 };
 
+answers.countOccurences = function (inputArray, value) {
+
+};
+
 module.exports = answers;
