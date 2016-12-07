@@ -5,30 +5,30 @@ module.exports = function () {
     'use strict'
 
     let scenario = {
-        inputArray: undefined,
+        arrays: [],
         answerFunction: undefined,
         result: undefined
     };
 
     this.Before(setup);
 
-    this.Given(/^inputArray = \[(.*)\]$/, function (arrayString, done) {
+    this.Given(/^(\w+) = \[(.*)\]$/, function (arrayName, arrayString, done) {
 
         let inputArray = stringToArray(arrayString);
 
-        setInputArray(inputArray);
+        setArray(arrayName, inputArray);
         done();
     });
 
-    this.Given(/^a function: (.*)$/, function (functionName, done) {
+    this.Given(/^a function: (\w+)$/, function (functionName, done) {
 
         setAnswerFunction(arrays[functionName]);
         done();
     });
 
-    this.When(/^the function is called with \((\w+), (\d+)\)$/, function (one, two, done) {
+    this.When(/^the function is called with \((\w+), (\d+)\)$/, function (arrayName, value, done) {
 
-        setResult(scenario.answerFunction(scenario[one], parseInt(two)));
+        setResult(scenario.answerFunction(scenario.arrays[arrayName], value));
         done();
     });
 
@@ -37,6 +37,13 @@ module.exports = function () {
         setResult(scenario.answerFunction(scenario[one]));
         done();
     });
+
+    this.When(/^the function is called with \((\w+), (\w+)\)$/, function (arrayA, arrayB, done) {
+
+        setResult(scenario.answerFunction(scenario.arrays[arrayA], scenario.arrays[arrayB]));
+        done();
+    });
+
 
     this.Then(/^the function will return (-?\d+)$/, function (value) {
 
@@ -78,16 +85,26 @@ module.exports = function () {
         assert.equal(scenario.result[0], firstValue);
     });
 
+    this.Then(/^the function will return array with length (\d+), first value (\d+) and last value (\w+)$/, function (length, firstValue, lastValue) {
+
+        let resultLength = scenario.result.length;
+
+        assert.equal(resultLength, length);
+        assert.equal(scenario.result[0], firstValue);
+        assert.equal(scenario.result[resultLength-1], lastValue);
+    });
+
 
     function setup() {
-        setInputArray();
+
+        scenario.arrays = [];
         setAnswerFunction();
         setResult();
     }
 
-    function setInputArray(inputArray) {
+    function setArray(arrayName, inputArray) {
 
-        scenario.inputArray = inputArray;
+        scenario.arrays[arrayName] = inputArray;
     }
 
     function setAnswerFunction(answerFunction) {

@@ -56,6 +56,11 @@ Feature: Arrays
     Then the function will return array with length 3 and first value 2
 
   Scenario: join together two arrays
+    Given arrayA = [ 1, 2, 3 ]
+    And   arrayB = [ a, b, c ]
+    And a function: joinArrays
+    When the function is called with (arrayA, arrayB)
+    Then the function will return array with length 6, first value 1 and last value c
 
   Scenario: add an item anywhere in an array
 

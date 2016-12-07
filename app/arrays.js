@@ -34,4 +34,8 @@ answers.removeItemFromBeginning = function (inputArray, value) {
 
 };
 
+answers.joinArrays = function (arrayA, arrayB) {
+
+};
+
 module.exports = answers;
