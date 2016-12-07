@@ -22,4 +22,8 @@ answers.addItemToEndOfArray = function (inputArray, value) {
 
 };
 
+answers.removeLastItem = function (inputArray) {
+
+};
+
 module.exports = answers;

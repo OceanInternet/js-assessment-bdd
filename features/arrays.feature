@@ -38,6 +38,10 @@ Feature: Arrays
     Then the function will return array with length 5 and last value 10
 
   Scenario: remove the last item of an array
+    Given inputArray = [ 1, 2, 3, 4 ]
+    And a function: removeLastItem
+    When the function is called with (inputArray)
+    Then the function will return array with length 3 and last value 3
 
   Scenario: add an item to the beginning of an array
 
