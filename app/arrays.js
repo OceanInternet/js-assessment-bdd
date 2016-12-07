@@ -30,4 +30,8 @@ answers.addItemToBeginning = function (inputArray, value) {
 
 };
 
+answers.removeItemFromBeginning = function (inputArray, value) {
+
+};
+
 module.exports = answers;

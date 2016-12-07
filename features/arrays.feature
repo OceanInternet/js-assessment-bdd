@@ -50,6 +50,10 @@ Feature: Arrays
     Then the function will return array with length 5 and first value 10
 
   Scenario: remove the first item of an array
+    Given inputArray = [ 1, 2, 3, 4 ]
+    And a function: removeItemFromBeginning
+    When the function is called with (inputArray)
+    Then the function will return array with length 3 and first value 2
 
   Scenario: join together two arrays
 
