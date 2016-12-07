@@ -75,6 +75,10 @@ Feature: Arrays
     Then the function will return 3
 
   Scenario: find duplicates in an array
+    Given inputArray = [ 1, 2, 4, 4, 3, 3, 1, 5, 3 ]
+    And a function: findDuplicates
+    When the function is called with (inputArray)
+    Then the function will return array with length 3, first value 1 and last value 4
 
   Scenario: square each number in an array
 

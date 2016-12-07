@@ -46,4 +46,8 @@ answers.countOccurences = function (inputArray, value) {
 
 };
 
+answers.findDuplicates = function (inputArray) {
+
+};
+
 module.exports = answers;
