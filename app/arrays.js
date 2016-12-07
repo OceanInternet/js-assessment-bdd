@@ -18,4 +18,8 @@ answers.removeAllInstancesReturnOriginal = function (inputArray, value) {
 
 };
 
+answers.addItemToEndOfArray = function (inputArray, value) {
+
+};
+
 module.exports = answers;

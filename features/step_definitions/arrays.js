@@ -41,36 +41,33 @@ module.exports = function () {
     this.Then(/^the function will return (-?\d+)$/, function (value) {
 
         assert.equal(
-            value,
             scenario.result,
-            'function did not return ' + value
-        )
-        ;
-    });
-
-    this.Then(/^the function will return the sum of (\w+) values$/, function (one) {
-
-        assert.equal(
-            getSumOfArrayIntegers(scenario[one]),
-            scenario.result,
-            'function did not return sum of ' + one + ' values'
+            value
         );
     });
 
-    this.Then(/^the function will return (\w+) with instances of (\d+) removed$/, function (one, two) {
+    this.Then(/^the function will return the sum of (\w+) values$/, function (arrayName) {
+
+        assert.equal(
+            scenario.result,
+            getSumOfArrayIntegers(scenario[arrayName])
+        );
+    });
+
+    this.Then(/^the function will return (\w+) with instances of (\d+) removed$/, function (arrayName, value) {
 
         assert.deepEqual(
-            removeInstances(scenario[one], two),
-            scenario.result
+            scenario.result,
+            removeInstances(scenario[arrayName], value)
         );
     });
 
-    this.Then(/^the function will return (\w+)$/, function (one) {
+    this.Then(/^the function will return array with length (\d+) and last value (\d+)$/, function (length, lastValue) {
 
-        assert.equal(
-            scenario[one],
-            scenario.result
-        );
+        let resultLength = scenario.result.length;
+
+        assert.equal(resultLength, length);
+        assert.equal(scenario.result[resultLength-1], lastValue);
     });
 
 

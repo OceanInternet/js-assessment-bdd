@@ -29,10 +29,13 @@ Feature: Arrays
     Given inputArray = [ 1, 2, 3, 4, 2, 2 ]
     And a function: removeAllInstancesReturnOriginal
     When the function is called with (inputArray, 2)
-    Then the function will return inputArray
-    And the function will return inputArray with instances of 2 removed
+    Then the function will return inputArray with instances of 2 removed
 
   Scenario: add an item to the end of an array
+    Given inputArray = [ 1, 2, 3, 4 ]
+    And a function: addItemToEndOfArray
+    When the function is called with (inputArray, 10)
+    Then the function will return array with length 5 and last value 10
 
   Scenario: remove the last item of an array
 
