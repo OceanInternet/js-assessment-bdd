@@ -44,6 +44,10 @@ Feature: Arrays
     Then the function will return array with length 3 and last value 3
 
   Scenario: add an item to the beginning of an array
+    Given inputArray = [ 1, 2, 3, 4 ]
+    And a function: addItemToBeginning
+    When the function is called with (inputArray, 10)
+    Then the function will return array with length 5 and first value 10
 
   Scenario: remove the first item of an array
 

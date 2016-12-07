@@ -70,6 +70,14 @@ module.exports = function () {
         assert.equal(scenario.result[resultLength-1], lastValue);
     });
 
+    this.Then(/^the function will return array with length (\d+) and first value (\d+)$/, function (length, firstValue) {
+
+        let resultLength = scenario.result.length;
+
+        assert.equal(resultLength, length);
+        assert.equal(scenario.result[0], firstValue);
+    });
+
 
     function setup() {
         setInputArray();
